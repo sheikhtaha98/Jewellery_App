@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+import 'package:ui_project/Constants/colors.dart';
+import 'package:ui_project/Functions/getItemNumber.dart';
+import 'package:ui_project/widgets/cartButton.dart';
+
+class DetailsAppBar extends StatefulWidget {
+  final String itemName;
+  const DetailsAppBar({super.key, required this.itemName});
+
+  @override
+  State<DetailsAppBar> createState() => _DetailsAppBarState();
+}
+
+class _DetailsAppBarState extends State<DetailsAppBar> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(
+            color: TextColors.textColor1,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: TextColors.textColor3.withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          child: const Center(child: BackButton()),
+        ),
+        const SizedBox(width: 20),
+        Text(
+          widget.itemName,
+          style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: TextColors.textColor3),
+        ),
+        const Spacer(),
+        Container(
+          margin: const EdgeInsets.only(left: 10),
+          child: CartIcon(
+            itemNumber: GetItemNumber.getItemNumber(),
+            iconColor: SecondaryColors.secondaryBlack01,
+            numberCircleColor: TextColors.textColor1,
+          ),
+        ),
+      ],
+    );
+  }
+}
